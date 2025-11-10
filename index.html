@@ -81,6 +81,9 @@
 
             try {
                 // Validate URL
+                if (publisher == '' || ext == '' || version == '') {
+                    throw "Some fields are left empty.";
+                }
                 new URL(url);
                 window.location.href = url;
             } catch (e) {
