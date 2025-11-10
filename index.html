@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download VS Code extension</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .flex-container-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            border: 1px solid black;
+            gap: 20px;
+        }
+
+        input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: hwb(16 26% 30%);
+            color: hsl(178, 37%, 52%);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: hwb(24 19% 39%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container-vertical">
+        <h1>Fill the information</h1>
+        <div class="container">
+            <p>Publisher</p>
+            <p>Product</p>
+            <p>Version</p>
+        </div>
+        <div class="container">
+            <input type="text" id="publisherInput" placeholder="" aria-label="Enter publisher name (nickname)">
+            <input type="text" id="extensionInput" placeholder="" aria-label="Enter extension (product) name">
+            <input type="text" id="versionInput" placeholder="" aria-label="Enter extension (product) version">
+        </div>
+        <button onclick="navigateToSite()">Go</button>
+    </div>
+
+    <script>
+        function navigateToSite() {
+            const publisher = document.getElementById('publisherInput').value.trim();
+            const ext = document.getElementById('extensionInput').value.trim();
+            const version = document.getElementById('versionInput').value.trim();
+
+            let url = `https://marketplace.visualstudio.com/_apis/public/gallery/publishers/${publisher}/vsextensions/${ext}/${version}/vspackage`
+
+            try {
+                // Validate URL
+                new URL(url);
+                window.location.href = url;
+            } catch (e) {
+                alert('Invalid URL');
+                input.focus();
+            }
+        }
+    </script>
+</body>
+
+</html>
